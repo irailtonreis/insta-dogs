@@ -3,9 +3,9 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
-import { BrowserRouter, Routes,  Route  } from 'react-reouter-dom'
+import Login from './Components/Login/Login';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import {  } from 'reac';
 function App() {
   return (
     <div className="App">
@@ -14,10 +14,10 @@ function App() {
         <Header />
           <Routes>
             <Route  path="/" element={<Home />}/>
-            <Route  />sss
+            <Route path="/login" element={<Login />} />
           </Routes>
         <Footer />
-      </BrowserRouter>s
+      </BrowserRouter>
     </div>
   );
 }
