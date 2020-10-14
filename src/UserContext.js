@@ -1,5 +1,5 @@
 import React from 'react';
-import { USER_GET, TOKEN_POST } from './api';
+import { USER_GET, TOKEN_POST, TOKEN_VALIDATE_POST } from './api';
 
 export const UserContext = React.createContext()
 
@@ -10,6 +10,40 @@ export const UserStorage = ({children}) =>{
     const [ loading, setLoading] = React.useState(null)
     const [ error, setError] = React.useState(null)
 
+    React.useEffect(() => {
+      async function autoLogin(){
+        const token = window.localStorage.getItem('token')
+
+        if(token)
+            setError(null)
+            setLoading(true)
+            try {
+                const { url, options } = TOKEN_VALIDATE_POST(token)
+                const response = await fetch(url, options)
+                if(!response.ok) throw new Error ("Token ínvalido")
+                await getUser(token)
+                
+            } catch (error) {
+                userLogout();
+                
+            }finally{
+               setLoading(false) 
+               
+            }
+          
+        }
+      
+
+      autoLogin()
+    }, [])
+
+    async function userLogout(){
+        setData(null)
+        setError(null)
+        setLoading(false)
+        setLogin(false)
+        window.localStorage.removeItem('token')
+    }
     async function getUser(token) {
         console.log(token)
         const { url, options } = USER_GET(token)
@@ -17,7 +51,6 @@ export const UserStorage = ({children}) =>{
         const json = await repsonse.json()
         setData(json)
         setLogin(true)
-        console.log(data)
     }
 
     async function userLogin(username, password) {
@@ -30,7 +63,7 @@ export const UserStorage = ({children}) =>{
     }
 
     return (
-   <UserContext.Provider value={{ userLogin, data }}>
+   <UserContext.Provider value={{ userLogin, data, userLogout }}>
         {children}
     </UserContext.Provider>
     )
