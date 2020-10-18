@@ -22,6 +22,13 @@ export const UserStorage = ({children}) =>{
           navigate("/login")
       },[navigate])
 
+      async function getUser(token) {
+        const { url, options } = USER_GET(token);
+        const response = await fetch(url, options);
+        const json = await response.json();
+        setData(json);
+        setLogin(true);
+      }
 
     React.useEffect(() => {
       async function autoLogin(){
@@ -49,50 +56,6 @@ export const UserStorage = ({children}) =>{
 
       autoLogin()
     }, [userLogout])
-
- 
-
-    React.useEffect(() => {
-      async function autoLogin(){
-        const token = window.localStorage.getItem('token')
-
-        if(token)
-            setError(null)
-            setLoading(true)
-            try {
-                const { url, options } = TOKEN_VALIDATE_POST(token)
-                const response = await fetch(url, options)
-                if(!response.ok) throw new Error ("Token ínvalido")
-                await getUser(token)
-                
-            } catch (error) {
-                userLogout();
-                
-            }finally{
-               setLoading(false) 
-               
-            }
-          
-        }
-      
-
-      autoLogin()
-    }, [])
-
-    async function userLogout(){
-        setData(null)
-        setError(null)
-        setLoading(false)
-        setLogin(false)
-        window.localStorage.removeItem('token')
-    }
-    async function getUser(token) {
-        const { url, options } = USER_GET(token)
-        const repsonse = await fetch(url, options)
-        const json = await repsonse.json()
-        setData(json)
-        setLogin(true)
-    }
 
     async function userLogin(username, password) {
         try {
