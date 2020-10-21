@@ -34,7 +34,7 @@ export const UserStorage = ({children}) =>{
       async function autoLogin(){
         const token = window.localStorage.getItem('token')
 
-        if(token)
+        if(token){
             setError(null)
             setLoading(true)
             try {
@@ -51,8 +51,10 @@ export const UserStorage = ({children}) =>{
                
             }
           
+        }else {
+            setLogin(false)
         }
-      
+    }
 
       autoLogin()
     }, [userLogout])
