@@ -1,10 +1,11 @@
 import React from 'react'
-
-const FeedPhotosItem = () => {
+import styles from './FeedPhotosItem.module.css';
+const FeedPhotosItem = ({photo}) => {
     return (
-        <div>
-            feed photos
-        </div>
+        <li className={styles.photo}>
+            <img src={photo.src} alt={photo.title} />
+            <span className={styles.visualizacao}>{photo.acessos}</span>
+        </li>
     )
 }
 
