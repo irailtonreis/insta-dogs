@@ -33,7 +33,7 @@ export const UserStorage = ({children}) =>{
     React.useEffect(() => {
       async function autoLogin(){
         const token = window.localStorage.getItem('token')
-
+       
         if(token){
             setError(null)
             setLoading(true)
