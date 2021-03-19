@@ -30,13 +30,13 @@ npm run start
 ## Frontend - Interfaces
 
 ### 1. Registro de um Cachorro
-<img src='/images/cadastro.png' width='800px'>
+<img src='images/cadastro.jpeg' width='800px'>
 
 ### 2. Login
-<img src='/images/login.png' width='800px'>
+<img src='images/login.png' width='800px'>
 
 ### 3. Feed de fotos
-<img src='/images/feed.pnn' width='800px'>
+<img src='images/feed.png' width='800px'>
 
 ## Mobile - Acesse a versão mobile
 [https://github.com/irailtonreis/mobile-be-the-hero](https://github.com/irailtonreis/mobile-be-the-hero)
