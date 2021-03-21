@@ -7,32 +7,35 @@ import Loading from '../Helper/Loading';
 import styles from './FeedPhotos.module.css';
 
 
-const FeedPhotos = ({user, setModalPhoto}) => {
-    const { data, error, loading, request } = useFetch()
+const FeedPhotos = ({ page, user, setModalPhoto, setInfinite }) => {
+  const { data, loading, error, request } = useFetch();
 
-    React.useEffect(() => {
-       async function fetchPhotos() {
-         const { url, options } = PHOTOS_GET({page: 1, total: 2, user}) 
-         const {response, json } = await request(url, options) 
-         console.log(response)
+  React.useEffect(() => {
+    async function fetchPhotos() {
+      const total = 3;
+      const { url, options } = PHOTOS_GET({ page, total, user });
+      const { response, json } = await request(url, options);
+      console.log('Request:', json);
+      if (response && response.ok && json.length < total) setInfinite(false);
+    }
+    fetchPhotos();
+  }, [request, user, page, setInfinite]);
 
-       }    
-       fetchPhotos()
-      }, [request, user])
-
-      if(error) return <Error error={error} />
-      if(loading) return <Loading />
-      if(data)
+  if (error) return <Error error={error} />;
+  if (loading) return <Loading />;
+  if (data)
     return (
-        <ul className={`${styles.feed} animeLeft`}>
-          {data.map(photo => 
-          <FeedPhotosItem 
-          key={photo.id} photo={photo}  
-          setModalPhoto={setModalPhoto}/>)
-          }
-        </ul>
-    )
-    else return null
-}
+      <ul className={`${styles.feed} animeLeft`}>
+        {data.map((photo) => (
+          <FeedPhotosItem
+            key={photo.id}
+            photo={photo}
+            setModalPhoto={setModalPhoto}
+          />
+        ))}
+      </ul>
+    );
+  else return null;
+};
 
-export default FeedPhotos
+export default FeedPhotos;
