@@ -38,9 +38,6 @@ npm run start
 ### 3. Feed de fotos
 <img src='images/feed.jpeg' width='800px'>
 
-## Mobile - Acesse a versão mobile
-[https://github.com/irailtonreis/mobile-be-the-hero](https://github.com/irailtonreis/mobile-be-the-hero)
-
 ## 📝 License
 Copyright © 2020 [irailton](https://github.com/irailtonreis).<br />
 This project is [MIT](https://github.com/irailtonreis/frontend-be-the-hero/licence) licensed.
