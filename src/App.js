@@ -7,6 +7,7 @@ import Home from './Components/Home';
 import Login from './Components/Login/Login';
 import User from './Components/User/User';
 import UserProfile from './Components/User/UserProfile';
+import NotFound from './Components/NotFound';
 import Photo from './Components/Photo/Photo';
 import { UserStorage } from './UserContext';
 import ProtectedRouter from './Components/Helper/ProtectedRouter';
@@ -24,6 +25,7 @@ function App() {
               <ProtectedRouter path="conta/*" element={<User />} />
               <Route path="foto/:id" element={<Photo />} />
               <Route path="perfil/:user" element={<UserProfile />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           <Footer />
         </UserStorage>
