@@ -13,7 +13,7 @@ const User = () => {
         <div className="container">
             <UserHeader />
             <Routes>
-                <Route path="/" element={<Feed user={data.id} />}/>
+                <Route path="/" element={<Feed userSearch={data.id} />}/>
                 <Route path="/postar" element={<UserPhotoPost />}/>
                 <Route path="/estatisticas" element={<UserStats />}/>
                 <Route path="*" element={<NotFound />} />
