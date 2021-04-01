@@ -1,6 +1,7 @@
 export const API_URL = 'https://dogsapi.origamid.dev/json'
 
 export function TOKEN_POST (body){
+    console.log("data", body);
     return{
         url: API_URL + '/jwt-auth/v1/token',
         options: {
@@ -124,3 +125,17 @@ export function PHOTO_DELETE(id) {
       },
     };
   }
+
+  export function PASSWORD_RESET(body) {
+    return {
+      url: API_URL + '/api/password/reset',
+      options: {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      },
+    };
+  }
+  
